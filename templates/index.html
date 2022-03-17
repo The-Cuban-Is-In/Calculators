@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" value="{{currentNum}}">
+    
+    <a href="{{ url_for('buttonClick', numOp='1', choice='number' ) }}">1</a>
+    <a href="{{ url_for('buttonClick', numOp='2', choice='number' ) }}">2</a>
+    <a href="{{ url_for('buttonClick', numOp='3', choice='number' ) }}">3</a> 
+    <a href="{{ url_for('buttonClick', numOp='+', choice='operator') }}">+</a>
+
+    <a href="{{ url_for('buttonClick', numOp='4', choice='number' ) }}">4</a>
+    <a href="{{ url_for('buttonClick', numOp='5', choice='number' ) }}">5</a>
+    <a href="{{ url_for('buttonClick', numOp='6', choice='number' ) }}">6</a>
+    <a href="{{ url_for('buttonClick', numOp='-', choice='operator' ) }}">-</a>
+
+    <a href="{{ url_for('buttonClick', numOp='7', choice='number' ) }}">7</a>
+    <a href="{{ url_for('buttonClick', numOp='8', choice='number' ) }}">8</a>
+    <a href="{{ url_for('buttonClick', numOp='9', choice='number' ) }}">9</a>
+    <a href="{{ url_for('buttonClick', numOp='*', choice='operator' ) }}">*</a>
+
+    <a href="{{ url_for('buttonClick', numOp='33', choice='clear' ) }}">c</a>
+    <a href="{{ url_for('buttonClick', numOp='0', choice='number' ) }}">0</a>
+    <a href="{{ url_for('buttonClick', numOp='33', choice='equality' ) }}">=</a>
+    <a href="{{ url_for('buttonClick', numOp='div', choice='operator' ) }}">/</a>
+</body>
+</html>
