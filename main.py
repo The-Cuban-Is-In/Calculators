@@ -1,3 +1,4 @@
+from decimal import DivisionByZero
 from flask import Flask, render_template, redirect, request, url_for
 
 app = Flask(__name__)
@@ -20,23 +21,23 @@ def buttonClick(numOp, choice):
         currentNum = f'{currentNum}{numOp}'
     elif choice == 'operator':
         num1 = int(currentNum)
-        if numOp == 'div':
-            op = '/'
-        else:
-            op = numOp
+        op = numOp
         currentNum = ''
     elif choice == 'equality':
         num2 = currentNum
-        try:
+        if op == 'div':
+            op = '/'
+            try:
+                currentNum = eval(f'{num1}{op}{num2}')
+            except ZeroDivisionError:
+                currentNum = 'ERROR:CANT DIVIDE BY 0'
+        else:        
             currentNum = eval(f'{num1}{op}{num2}')
-        except Exception:
-            currentNum = 'Error: Error'
     elif choice == 'clear':
         currentNum = ''
         
     return redirect(url_for('home', currentNum = currentNum))
     
-
 
 if __name__ == '__main__':
     app.run(debug=True)
