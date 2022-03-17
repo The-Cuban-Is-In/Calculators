@@ -28,7 +28,8 @@
     background: rgb(70, 70, 70);
     color: white;
     text-decoration: none;
-    padding: 15px;
+    padding: 20px;
+    border-radius: 15px;
 }
 
 .calculator-wrap a:hover {
@@ -36,6 +37,6 @@
 }
 
 #calculator-row {
-    margin: 12px 12px;
+    margin: 25px 15px;
     margin-top: 25px
 }
