@@ -15,6 +15,7 @@
 .calculator-wrap {
     background-color: grey;
     padding: 20px;
+    padding-bottom: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,6 +23,7 @@
     max-width: 100%;
     max-height: auto;
     border-radius: 25px;
+    gap: 2em;
 }
 
 .calculator-wrap a {
@@ -30,6 +32,7 @@
     text-decoration: none;
     padding: 20px;
     border-radius: 15px;
+    
 }
 
 .calculator-wrap a:hover {
@@ -37,6 +40,5 @@
 }
 
 #calculator-row {
-    margin: 25px 15px;
     margin-top: 25px
 }

@@ -28,7 +28,10 @@ def buttonClick(numOp, choice):
         num2 = float(currentNum)
 
         if op == 'pow':
-            currentNum = math.pow(num1, num2)
+            try:
+                currentNum = math.pow(num1, num2)
+            except OverflowError:
+                currentNum = 'Error: Out of Range'
         elif op == 'div':
             op = '/'
             try:
