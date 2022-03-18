@@ -1,4 +1,5 @@
 from decimal import DivisionByZero
+from winreg import REG_QWORD
 from flask import Flask, render_template, redirect, request, url_for
 import math
 
@@ -11,13 +12,16 @@ op = ''
 num1 = ''
 num2 = ''
 
-option = 'graphic-calc'
-
 @app.route('/', methods=['POST', 'GET'])
 def home():
     global option
-    option = request.args['option']
     bmiValue = ''
+    totalMaterialCost = ''
+
+    try:        # -- trys to find an option in args before defaulting to the first option 'graphic calculator'
+        option = request.args['option']
+    except:
+        option = 'graphic-calc'
 
     if request.method == 'POST':
         if option == 'bmi-calc':    # -- Confirms the form being submitted is for the bmi-calculator
@@ -25,12 +29,17 @@ def home():
             inches = request.form.get('inches')
             pounds = request.form.get('pound')
             kilograms = (float(pounds) / 2.205)
-            inches = (float(feet)*12) + float(inches)
-            meters = inches/39.37
-            bmiValue = kilograms/math.pow(meters, 2)
+            meters = ((float(feet) * 12) + float(inches)) / 39.37
+            bmiValue = kilograms / math.pow(meters, 2)
             bmiValue = '{:.2f}'.format(bmiValue)
+        if option == 'material-calc':
+            material = request.form.get('material')
+            cost = request.form.get('cost')
+            totalMaterialCost = str(float(material) * float(cost))
 
-    return render_template('index.html', currentNum = currentNum, option = option, bmiValue = bmiValue)
+            
+
+    return render_template('index.html', currentNum = currentNum, option = option, bmiValue = bmiValue, totalMaterialCost = totalMaterialCost)
 
 @app.route('/button-click/<string:numOp>/<string:choice>')      # -- Click options for Graphic calculator
 def buttonClick(numOp, choice):

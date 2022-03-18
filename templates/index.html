@@ -110,7 +110,24 @@
     {% if option == 'material-calc' %}      <!-- MATERIALS-CALCULATOR -->
         <section>
             <h1>Materials Calculator</h1>
-            <p>Calculates the cost of materials based on the materials needed.</p>
+            <form method="POST">
+                <div>
+                    <label for="material">Amount of Material:</label>
+                    <input type="text" id="material", name="material">
+                </div>
+                <div>
+                    <label for="cost">Cost:</label>
+                    <input type="text" id="cost", name="cost">
+                </div>
+
+                <button type="submit">Submit</button>
+
+                <div>
+                    <label for="total-cost">Cost of Materials:</label>
+                    <input type="text" id="total-cost", value="{{ totalMaterialCost }}" disabled>
+                </div>
+                
+            </form>
         </section>
     {% endif %}
 </body>
