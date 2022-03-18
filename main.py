@@ -1,5 +1,4 @@
 from decimal import DivisionByZero
-from winreg import REG_QWORD
 from flask import Flask, render_template, redirect, request, url_for
 import math
 
