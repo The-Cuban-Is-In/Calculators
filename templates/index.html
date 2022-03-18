@@ -8,49 +8,110 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <div class="main-wrapper">
-        <div>
-            <h1 class="title">Graphic Calculator</h1>
-        </div>
-        
-        <div class="calculator-wrap">
+    <nav class="navigation">
+        <ul>
+            <a href="{{ url_for('home', option='graphic-calc') }}">Graphic Calculator</a>
+            <a href="{{ url_for('home', option='bmi-calc') }}">BMI Calculator</a>
+            <a href="{{ url_for('home', option='material-calc') }}">Materials Calculator</a>
+        </ul>
+    </nav>
+
+    {% if option == 'graphic-calc' %}   <!-- GRAPHIC-CALCULATOR -->
+        <section class="main-wrapper">
             <div>
-                <input type="text" value="{{currentNum}}" disabled>
+                <h1 class="title">Graphic Calculator</h1>
             </div>
+            
+            <div class="calculator-wrap">
+                <div>
+                    <input type="text" value="{{currentNum}}" disabled>
+                </div>
 
-            <div id="calculator-row">
-                <a href="{{ url_for('buttonClick', numOp='#', choice='negative' ) }}">(-x)</a>
-                <a href="{{ url_for('buttonClick', numOp='1', choice='number' ) }}">1</a>
-                <a href="{{ url_for('buttonClick', numOp='2', choice='number' ) }}">2</a>
-                <a href="{{ url_for('buttonClick', numOp='3', choice='number' ) }}">3</a> 
-                <a href="{{ url_for('buttonClick', numOp='+', choice='operator') }}">+</a>
-            </div>
+                <div id="calculator-row">
+                    <a href="{{ url_for('buttonClick', numOp='#', choice='negative' ) }}">(-x)</a>
+                    <a href="{{ url_for('buttonClick', numOp='1', choice='number' ) }}">1</a>
+                    <a href="{{ url_for('buttonClick', numOp='2', choice='number' ) }}">2</a>
+                    <a href="{{ url_for('buttonClick', numOp='3', choice='number' ) }}">3</a> 
+                    <a href="{{ url_for('buttonClick', numOp='+', choice='operator') }}">+</a>
+                </div>
 
-            <div id="calculator-row">
-                <a href="{{ url_for('buttonClick', numOp='#', choice='square-root' ) }}">&#8730;</a>
-                <a href="{{ url_for('buttonClick', numOp='4', choice='number' ) }}">4</a>
-                <a href="{{ url_for('buttonClick', numOp='5', choice='number' ) }}">5</a>
-                <a href="{{ url_for('buttonClick', numOp='6', choice='number' ) }}">6</a>
-                <a href="{{ url_for('buttonClick', numOp='-', choice='operator' ) }}">-</a>
-            </div>
+                <div id="calculator-row">
+                    <a href="{{ url_for('buttonClick', numOp='#', choice='square-root' ) }}">&#8730;</a>
+                    <a href="{{ url_for('buttonClick', numOp='4', choice='number' ) }}">4</a>
+                    <a href="{{ url_for('buttonClick', numOp='5', choice='number' ) }}">5</a>
+                    <a href="{{ url_for('buttonClick', numOp='6', choice='number' ) }}">6</a>
+                    <a href="{{ url_for('buttonClick', numOp='-', choice='operator' ) }}">-</a>
+                </div>
 
-            <div id="calculator-row">
-                <a href="{{ url_for('buttonClick', numOp='#', choice='square' ) }}">X <sup>2</sup></a>
-                <a href="{{ url_for('buttonClick', numOp='7', choice='number' ) }}">7</a>
-                <a href="{{ url_for('buttonClick', numOp='8', choice='number' ) }}">8</a>
-                <a href="{{ url_for('buttonClick', numOp='9', choice='number' ) }}">9</a>
-                <a href="{{ url_for('buttonClick', numOp='*', choice='operator' ) }}">*</a>
-            </div>
+                <div id="calculator-row">
+                    <a href="{{ url_for('buttonClick', numOp='#', choice='square' ) }}">X <sup>2</sup></a>
+                    <a href="{{ url_for('buttonClick', numOp='7', choice='number' ) }}">7</a>
+                    <a href="{{ url_for('buttonClick', numOp='8', choice='number' ) }}">8</a>
+                    <a href="{{ url_for('buttonClick', numOp='9', choice='number' ) }}">9</a>
+                    <a href="{{ url_for('buttonClick', numOp='*', choice='operator' ) }}">*</a>
+                </div>
 
-            <div id="calculator-row">
-                <a href="{{ url_for('buttonClick', numOp='pow', choice='operator' ) }}">X <sup>x</sup></a>
-                <a href="{{ url_for('buttonClick', numOp='#', choice='clear' ) }}">c</a>
-                <a href="{{ url_for('buttonClick', numOp='0', choice='number' ) }}">0</a>
-                <a href="{{ url_for('buttonClick', numOp='#', choice='equality' ) }}">=</a>
-                <a href="{{ url_for('buttonClick', numOp='div', choice='operator' ) }}">/</a>
+                <div id="calculator-row">
+                    <a href="{{ url_for('buttonClick', numOp='pow', choice='operator' ) }}">X <sup>x</sup></a>
+                    <a href="{{ url_for('buttonClick', numOp='#', choice='clear' ) }}">c</a>
+                    <a href="{{ url_for('buttonClick', numOp='0', choice='number' ) }}">0</a>
+                    <a href="{{ url_for('buttonClick', numOp='#', choice='equality' ) }}">=</a>
+                    <a href="{{ url_for('buttonClick', numOp='div', choice='operator' ) }}">/</a>
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
+    {% endif %}
+
+    {% if option == 'bmi-calc' %}       <!-- BMI-CALCULATOR -->
+        <section class="bmi-main-wrap">
+            <h1>BMI Calculator</h1>
+            <form class="bmi-form-wrap" align="center" method="POST">
+                <div class="bmi-div-wrap">
+                    <label for="feet">Feet:</label>
+                    <input type="text" id="feet" name="feet">
+                </div>
+                <div class="bmi-div-wrap">
+                    <label for="inches">Inches:</label>
+                    <input type="text" id="inches" name="inches">
+                </div>
+                <div class="bmi-div-wrap">
+                    <label for="pound">Pounds:</label>
+                    <input type="text" id="pound" name="pound">
+                </div>
+                    
+                <button type="submit" class="bmi-submit-button">Get BMI</button>
+                
+                <div class="bmi-total-wrap">
+                    <label>BMI</label>
+                    <input type="text" value="{{ bmiValue }}" disabled>
+                </div>  
+            </form>
+
+            <div class="bmi-chart">
+                <!-- TODO this needs to be converted into a table -->
+                <div>
+                    <h2>BMI</h2>
+                    <h3>Below 18.5</h3>
+                    <h3>18.5-24.9</h3>
+                    <h3>25.0-29.9</h3>
+                    <h3>30.0 and Above</h3>
+                </div>
+                <div>
+                    <h2>Weight Status</h2>
+                    <h3>Underweight</h3>
+                    <h3>Healthy</h3>
+                    <h3>Overweight</h3>
+                    <h3>Obese</h3>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {% if option == 'material-calc' %}      <!-- MATERIALS-CALCULATOR -->
+        <section>
+            <h1>Materials Calculator</h1>
+            <p>Calculates the cost of materials based on the materials needed.</p>
+        </section>
+    {% endif %}
 </body>
 </html>

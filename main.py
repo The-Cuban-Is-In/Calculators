@@ -5,16 +5,34 @@ import math
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hj3klh42kj3h4jk23h3jkhjh3jk242h4jk3h4jk34hrrbfbdbf'
 
-currentNum = ''
+
+currentNum = ''     # -- TODO need to find a way to eliminate the need for these variables
 op = ''
 num1 = ''
 num2 = ''
 
-@app.route('/')
-def home():
-    return render_template('index.html', currentNum = currentNum)
+option = 'graphic-calc'
 
-@app.route('/button-click/<string:numOp>/<string:choice>')
+@app.route('/', methods=['POST', 'GET'])
+def home():
+    global option
+    option = request.args['option']
+    bmiValue = ''
+
+    if request.method == 'POST':
+        if option == 'bmi-calc':    # -- Confirms the form being submitted is for the bmi-calculator
+            feet = request.form.get('feet')
+            inches = request.form.get('inches')
+            pounds = request.form.get('pound')
+            kilograms = (float(pounds) / 2.205)
+            inches = (float(feet)*12) + float(inches)
+            meters = inches/39.37
+            bmiValue = kilograms/math.pow(meters, 2)
+            bmiValue = '{:.2f}'.format(bmiValue)
+
+    return render_template('index.html', currentNum = currentNum, option = option, bmiValue = bmiValue)
+
+@app.route('/button-click/<string:numOp>/<string:choice>')      # -- Click options for Graphic calculator
 def buttonClick(numOp, choice):
     global currentNum, num1, num2, op
 
@@ -50,7 +68,7 @@ def buttonClick(numOp, choice):
         currentNum = float(currentNum) ** 2
         
     return redirect(url_for('home', currentNum = currentNum))
-    
+
 
 if __name__ == '__main__':
     app.run(debug=True)

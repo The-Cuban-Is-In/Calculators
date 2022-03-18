@@ -1,3 +1,26 @@
+/* Graphic Calculator */
+.navigaiton ul {
+    background-color: grey;
+}
+
+.navigation a {
+    text-decoration: none;
+    padding-right: 5px;
+    color: black;
+    border-right: 1px solid rgb(128, 128, 128);
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 10px;
+}
+
+.navigation a:hover {
+    background: rgb(49, 49, 49);
+    color: white;
+} 
+
+.navigaiton a:first-child {
+    border-right: hidden; 
+}
+
 .main-wrapper {
     display: flex;
     flex-direction: column;
@@ -5,6 +28,7 @@
     align-items: center;
     width: 100%;
     min-height: auto;
+    padding-top: 50px;
 }
 
 .title {
@@ -42,3 +66,79 @@
 #calculator-row {
     margin-top: 25px
 }
+
+/* BMI Calculator */
+
+.bmi-main-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.bmi-main-wrap h1 {
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.bmi-form-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-color: grey;
+    max-width: fit-content;
+    min-height: auto;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.bmi-div-wrap {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+}
+
+.bmi-div-wrap label {
+    align-self: flex-start;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    padding-bottom: 5px;
+    color: white;
+}
+
+.bmi-submit-button {
+    margin-top: 8px;
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+.bmi-submit-button:hover {
+    background: rgb(26, 26, 26);
+    color: white;
+}
+
+.bmi-chart {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.bmi-chart div {
+    border: 1px solid black;
+    text-align: center;
+
+}
+
+.bmi-chart h2 {
+    border-bottom: 1px solid black;
+    margin: 0;
+}
+
+.bmi-chart h3 {
+    border-bottom: 1px solid black;
+    margin: 0;
+}
+
+/* MATERIALS CALCULATOR */
