@@ -17,48 +17,69 @@
     </nav>
 
     {% if option == 'graphic-calc' %}   <!-- GRAPHIC-CALCULATOR -->
+        {% if not num1 %}
+            {% set num1 = '' %}
+        {% endif %}
+
         <section class="main-wrapper">
             <div>
                 <h1 class="title">Graphic Calculator</h1>
             </div>
             
-            <div class="calculator-wrap">
-                <div>
-                    <input type="text" value="{{currentNum}}" disabled>
+            <form class="calculator-wrap" method="POST" action="{{ url_for('home', currentNum=currentNum) }}">
+                {% if currentNum %}
+                    <input type="text" id="graphic-entry" name="graphicEntry" value="{{currentNum}}" disabled>
+                {% else %}
+                    <input type="text" id="graphic-entry" name="graphicEntry" value="{% set currentNum = ''%}" disabled>
+                {% endif %}
+                    
+
+                <div id="calculator-row">
+                     <button type="submit" name="number" value="1">1</button>
+                     <button type="submit" name="number" value="2">2</button>
+                     <button type="submit" name="number" value="3">3</button>
+                     <button type="submit" name="operator" value="+">+</button>
+                     <button type="submit" name="square-root" value=" ">&#8730;</button>
                 </div>
 
                 <div id="calculator-row">
-                    <a href="{{ url_for('buttonClick', numOp='#', choice='negative' ) }}">(-x)</a>
-                    <a href="{{ url_for('buttonClick', numOp='1', choice='number' ) }}">1</a>
-                    <a href="{{ url_for('buttonClick', numOp='2', choice='number' ) }}">2</a>
-                    <a href="{{ url_for('buttonClick', numOp='3', choice='number' ) }}">3</a> 
-                    <a href="{{ url_for('buttonClick', numOp='+', choice='operator') }}">+</a>
+                    <button type="submit" name="number" value="4">4</button>
+                    <button type="submit" name="number" value="5">5</button>
+                    <button type="submit" name="number" value="6">6</button>
+                    <button type="submit" name="operator" value="-">-</button>
+                    <button type="submit" name="square" value=" ">x<sup>2</sup></button>
+               </div>
+            
+               <div id="calculator-row">
+                    <button type="submit" name="number" value="7">7</button>
+                    <button type="submit" name="number" value="8">8</button>
+                    <button type="submit" name="number" value="9">9</button>
+                    <button type="submit" name="operator" value="/">/</button>
+                    <button type="submit" name="operator" value="exponent">x<sup>x</sup></button>
+                </div>
+
+               <div id="calculator-row">
+                    <button type="submit" name="clear" value="c">c</button>
+                    <button type="submit" name="number" value="0">0</button>
+                    <button type="submit" name="equal" value="=">=</button>
+                    <button type="submit" name="operator" value="*">*</button>
+                    <button type="submit" name="negative" value="-">-x</button>
                 </div>
 
                 <div id="calculator-row">
-                    <a href="{{ url_for('buttonClick', numOp='#', choice='square-root' ) }}">&#8730;</a>
-                    <a href="{{ url_for('buttonClick', numOp='4', choice='number' ) }}">4</a>
-                    <a href="{{ url_for('buttonClick', numOp='5', choice='number' ) }}">5</a>
-                    <a href="{{ url_for('buttonClick', numOp='6', choice='number' ) }}">6</a>
-                    <a href="{{ url_for('buttonClick', numOp='-', choice='operator' ) }}">-</a>
+                    <button type="submit" name="" value="">a</button>
+                    <button type="submit" name="" value="=">b</button>
+                    <button type="submit" name="" value="*">c</button>
+                    <button type="submit" name="" value="-">d</button>
+                    <button type="submit" name="decimal" value=".">.</button>
                 </div>
 
-                <div id="calculator-row">
-                    <a href="{{ url_for('buttonClick', numOp='#', choice='square' ) }}">X <sup>2</sup></a>
-                    <a href="{{ url_for('buttonClick', numOp='7', choice='number' ) }}">7</a>
-                    <a href="{{ url_for('buttonClick', numOp='8', choice='number' ) }}">8</a>
-                    <a href="{{ url_for('buttonClick', numOp='9', choice='number' ) }}">9</a>
-                    <a href="{{ url_for('buttonClick', numOp='*', choice='operator' ) }}">*</a>
-                </div>
+                
 
-                <div id="calculator-row">
-                    <a href="{{ url_for('buttonClick', numOp='pow', choice='operator' ) }}">X <sup>x</sup></a>
-                    <a href="{{ url_for('buttonClick', numOp='#', choice='clear' ) }}">c</a>
-                    <a href="{{ url_for('buttonClick', numOp='0', choice='number' ) }}">0</a>
-                    <a href="{{ url_for('buttonClick', numOp='#', choice='equality' ) }}">=</a>
-                    <a href="{{ url_for('buttonClick', numOp='div', choice='operator' ) }}">/</a>
-                </div>
-            </div>
+                <!-- 
+                    buttons to add (decimal, )    
+                 -->
+            </form>
         </section>
     {% endif %}
 
@@ -108,26 +129,41 @@
     {% endif %}
 
     {% if option == 'material-calc' %}      <!-- MATERIALS-CALCULATOR -->
-        <section>
-            <h1>Materials Calculator</h1>
-            <form method="POST">
-                <div>
-                    <label for="material">Amount of Material:</label>
-                    <input type="text" id="material", name="material">
+        <section id="materials-seciton">
+            <h1 class="materials-h1">Materials Calculator</h1>
+            {% if materialSelect %}
+                <div class="choice-form-wrap">
+                    <form method="POST" class="materials-choice-form" action="{{ url_for('home', currentNum=currentNum, materialSelect=materialSelect, option = option, totalMaterials=totalMaterials)}}">
+                        <label for="select-materials", id="choice-form-label">How many different materials are you planning on purchaceing?</label>
+                        <input id="entry-materials-choice" type="text" id="select-materials" name="materials">
+                        <button type="submit" id="submit-materials" >Select Amount</button>
+                    </form>
                 </div>
-                <div>
-                    <label for="cost">Cost:</label>
-                    <input type="text" id="cost", name="cost">
-                </div>
+            {% else %}
+                {% set totalMaterials = totalMaterials | int %}
+                <form method="POST" class="materials-form" action="{{ url_for('home', currentNum=currentNum, materialSelect=materialSelect, option = option, totalMaterials=totalMaterials) }}">
+                    {% for totalMaterial in range(totalMaterials) %}
+                        <div class="material-cost-div" method="POST">
+                            <label for="material">Material {{ totalMaterial + 1 }}:</label>
+                            <input type="text" id="material{{ totalMaterial + 1}}", name="material{{ totalMaterial + 1}}">
 
-                <button type="submit">Submit</button>
+                            <label for="cost">Cost {{ totalMaterial + 1}}:</label>
+                            <input type="text" id="cost{{ totalMaterial + 1}}", name="cost{{ totalMaterial + 1}}">
+                        </div>
+                    {% endfor %}
 
-                <div>
-                    <label for="total-cost">Cost of Materials:</label>
-                    <input type="text" id="total-cost", value="{{ totalMaterialCost }}" disabled>
-                </div>
+                    <button type="submit" id="material-button">Total</button>
+            
+                    <div>
+                        <label for="total-cost">Cost of Materials:</label>
+                        <input type="text" id="total-cost", value="{{ totalMaterialCost }}" disabled>
+                    </div>
+                    <form method="POST" action="{{ url_for('home', currentNum=currentNum, materialSelect=True, option = 'material-calc', totalMaterials=totalMaterials)}}">
+                        <button type="submit" id="material-button" name="back-button", value="back">Back</button>
+                    </form>
+                </form>
+            {% endif %}
                 
-            </form>
         </section>
     {% endif %}
 </body>
