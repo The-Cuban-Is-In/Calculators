@@ -1,3 +1,9 @@
+body {
+    background-color: rgb(51, 141, 89);
+    min-height: auto;
+    max-width: 100%;
+}
+
 /* Graphic Calculator */
 .navigaiton ul {
     background-color: grey;
@@ -216,6 +222,7 @@
     display: flex;
     flex-direction: column;
     background-color: grey;
+    border-radius: 25px;
     justify-content: center;
     align-self: center;
     padding: 20px;
@@ -231,6 +238,8 @@
 
 .materials-choice-form input {
     margin-bottom: 10px;
+    border-radius: 25px;
+    padding-left: 10px;
 }
 
 .materials-choice-form button {

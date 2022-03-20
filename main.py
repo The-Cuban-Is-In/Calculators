@@ -4,7 +4,7 @@ from flask import Flask, render_template, redirect, request, url_for
 from werkzeug import exceptions
 
 import math
-import werkzeug
+import datetime
 
 
 
@@ -19,7 +19,7 @@ def home():
     
     try:
         totalMaterials = request.form.get('materials')
-    except:
+    except Exception:
         totalMaterials = 0
 
     try:
@@ -44,40 +44,30 @@ def home():
             feet = request.form.get('feet')
             inches = request.form.get('inches')
             pounds = request.form.get('pound')
-            kilograms = (float(pounds) / 2.205)
-            meters = ((float(feet) * 12) + float(inches)) / 39.37
-            bmiValue = kilograms / math.pow(meters, 2)
-            bmiValue = '{:.2f}'.format(bmiValue)
+            bmiValue = f'{(float(pounds) / 2.205)/math.pow(((float(feet) * 12) + float(inches)) / 39.37, 2):.2f}'   
 
         if option == 'material-calc':   #-- POST requests for Material Calc
-            
             if materialSelect:      # -- Confirms is on material select or not
-                print(materialSelect)
-                totalMaterials = request.form.get('materials')
-                materialSelect = False
+                totalMaterials, materialSelect = request.form.get('materials'), False
                 
             if materialSelect == False:       # -- Confirms is on material select or not
-                trash = []
                 materialValues = []
-                costValues = []
-                print(materialSelect)
+
                 for materials in range(len(request.form)):
                     if request.form.get(f'material{materials + 1}') == None or request.form.get(f'cost{materials + 1}') == None:
-                        try:
-                            trash.append(request.form.get(f'material{materials + 1}'))
-                        except:
-                            trash.append(request.form.get(f'cost{materials + 1}'))
+                        del materials
                     else:
-                        materialValues.append((float(request.form.get(f'material{materials + 1}')), float(request.form.get(f'cost{materials + 1}'))))
-                del trash
-                for a,b in materialValues:
-                    costValues.append(a * b)
-
-                totalMaterialCost = f'${sum(costValues) :.2f}'
+                        try:
+                            materialValues.append((float(request.form.get(f'material{materials + 1}')), float(request.form.get(f'cost{materials + 1}'))))
+                        except ValueError:
+                            break
+    
+                totalMaterialCost = f'${sum(x * y for x, y in materialValues) :.2f}'
                 materialSelect = False
+
             if request.form.get('back-button') == 'back':
                 materialSelect = True
-        
+
         if option == 'graphic-calc':        # -- Confirms the form being submitted is for the graphic-calculator
             try:
                 if 'number' in request.form:
@@ -114,7 +104,7 @@ def home():
                 currentNum = 'ERROR: division by zero'
             except ValueError:
                 pass
-            
+
     return render_template('index.html',        
         option = option,
         bmiValue = bmiValue,
