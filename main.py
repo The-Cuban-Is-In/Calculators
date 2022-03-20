@@ -14,7 +14,6 @@ app.config['SECRET_KEY'] = 'hj3klh42kj3h4jk23h3jkhjh3jk242h4jk3h4jk34hrrbfbdbf'
 @app.route('/', methods=['POST', 'GET'])
 def home():
     bmiValue = ''
-    
     totalMaterialCost = ''
     
     try:
@@ -24,8 +23,6 @@ def home():
 
     try:
         currentNum = request.args["currentNum"]
-        bmiValue = ''
-        totalMaterialCost = ''
     except KeyError:
         currentNum = ''
     

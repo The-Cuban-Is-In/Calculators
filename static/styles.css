@@ -45,7 +45,7 @@ body {
 .calculator-wrap {
     background-color: grey;
     padding: 20px;
-    padding-bottom: 40px;
+    padding-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,14 +53,14 @@ body {
     max-width: 100%;
     max-height: auto;
     border-radius: 25px;
-    gap: 2em;
+    gap: 0.25em;
 }
 
 #calculator-row button {
     background: rgb(70, 70, 70);
     color: white;
     text-decoration: none;
-    padding: 20px;
+    padding: 15px;
     border-radius: 100px;
     
 }
@@ -71,12 +71,10 @@ body {
 
 #graphic-entry  {
     max-width: 100%;
-    color: black
+    color: black;
+    margin-bottom: 5px;
 }
 
-#calculator-row button {
-    padding: 20px;
-}
 
 /* BMI Calculator */
 
@@ -123,6 +121,8 @@ body {
     margin-top: 8px;
     margin-bottom: 20px;
     max-width: 100%;
+    max-height: 100%;
+    border-radius: 25px;
 }
 
 .bmi-submit-button:hover {
