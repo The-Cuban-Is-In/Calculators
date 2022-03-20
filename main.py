@@ -102,8 +102,6 @@ def home():
                 currentNum = 'ERROR: Range to high'
             except ZeroDivisionError:
                 currentNum = 'ERROR: division by zero'
-            except ValueError:
-                pass
 
     return render_template('index.html',        
         option = option,
